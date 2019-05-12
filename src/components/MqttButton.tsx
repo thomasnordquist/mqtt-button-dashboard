@@ -55,7 +55,7 @@ function MqttButton(props: Props & DispatchProps) {
         onContextMenu={touchDown}
       >
         <Icon id={button.get('iconId')} color={button.get('state') ? theme.palette.primary.contrastText : theme.palette.primary.main} />
-        <span style={{marginLeft: '8px', fontSize: '1.8em', fontWeight: 700}}>{button.get('name')}</span>          
+        <span style={{marginLeft: '8px', fontSize: '1.8em', fontWeight: 500, lineHeight: '1.4em'}}>{button.get('name')}</span>
       </Button>
     </Badge>
   )
