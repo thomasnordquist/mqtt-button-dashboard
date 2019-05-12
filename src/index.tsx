@@ -21,8 +21,10 @@ function Application() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
+        <div style={{width: '100vw', height: '100vh', overflow: 'hidden'}}>
+          <CssBaseline />
+          <App />
+        </div>
       </ThemeProvider>
     </Provider>
   )

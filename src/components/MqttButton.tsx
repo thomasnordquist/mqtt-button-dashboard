@@ -17,7 +17,6 @@ interface DispatchProps {
 }
 
 const style = {
-  width: "15em",
 }
 
 function MqttButton(props: Props & DispatchProps) {
@@ -55,10 +54,8 @@ function MqttButton(props: Props & DispatchProps) {
         onTouchEnd={touchUp}
         onContextMenu={touchDown}
       >
-        <span style={{transform: 'translate(-8px)', display: 'inline-flex', padding: "0.5em"}}>
-          <Icon id={button.get('iconId')} color={button.get('state') ? theme.palette.primary.contrastText : theme.palette.primary.main} />
-          <span style={{marginLeft: '8px'}}>{button.get('name')}</span>
-        </span>
+        <Icon id={button.get('iconId')} color={button.get('state') ? theme.palette.primary.contrastText : theme.palette.primary.main} />
+        <span style={{marginLeft: '8px', fontSize: '1.8em', fontWeight: 700}}>{button.get('name')}</span>          
       </Button>
     </Badge>
   )

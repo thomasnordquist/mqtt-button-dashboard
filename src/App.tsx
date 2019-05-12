@@ -27,7 +27,7 @@ function App(props: Props & DispatchProps & StateProps) {
     }
   }, [])
 
-  return <div>
+  return <div style={{width: '100vw', height: '100vh', overflow: 'hidden auto'}}>
     <Grid buttons={props.buttons} /><br />
     <AddButton />
   </div>

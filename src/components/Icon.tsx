@@ -3,15 +3,16 @@ import * as React from 'react'
 export function Icon(props: {id?: string, color: string}) {
   const iconContainerStyle = {
     overflow: 'hidden',
-    height: '24px',
-    width: '24px',
+    height: '40px',
+    width: '40px',
     display: 'inline-block',
   }
   const iconStyle = {
-    height: '24px',
-    width: '24px',
-    filter: `opacity(1) drop-shadow(${props.color} 30px 0px 0px) brightness(100%)`,
-    transform: 'translate(-30px)',
+    height: '40px',
+    width: '40px',
+    display: 'inline-block',
+    filter: `opacity(1) drop-shadow(${props.color} 44px 0px 0px) brightness(100%)`,
+    transform: 'translate(-44px)',
   }
 
   const selector = `?id=${props.id}`
