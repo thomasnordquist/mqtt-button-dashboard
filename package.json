@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "webpack --mode production && yarn run ts-node src/server.ts",
+    "start": "webpack --mode production && yarn run ts-node src/server.ts",
     "dev": "webpack-dev-server --mode development --progress"
   },
   "author": "",
