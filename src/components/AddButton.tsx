@@ -34,7 +34,7 @@ const textFieldStyle = {
 
 const styles = (theme: Theme) => ({
   modal: {
-    width: '100vw', height: '100vh', position: 'fixed', backgroundColor: 'rgba(20, 20, 20, 0.7)',
+    width: '100vw', height: '100vh', position: 'fixed', backgroundColor: 'rgba(20, 20, 20, 0.8)',
     overflow: 'auto'
   },
   modalRoot: {
@@ -55,7 +55,7 @@ function AddButton(props: Props & DispatchProps) {
 
   return (
     <div>
-      <Fab color="secondary" style={{ zIndex: 1000000000, backgroundColor: visible ? '#f50057' : 'inherit', transition: 'all 0.75s ease-in', position: 'absolute', right: '16px', bottom: '16px', transform: `rotate(${visible ? 45 : 0}deg)` }} onClick={() => setVisible(!visible)}><AddIcon /></Fab>
+      <Fab color="secondary" style={{ zIndex: 1000000000, backgroundColor: visible ? '#f50057' : '#444', transition: 'all 0.75s ease-in', position: 'absolute', right: '16px', bottom: '16px', transform: `rotate(${visible ? 45 : 0}deg)` }} onClick={() => setVisible(!visible)}><AddIcon /></Fab>
       <Modal open={visible} className={props.classes.modal} classes={{ root: props.classes.modalRoot }}>
         <span style={{textAlign: 'center', display: 'block', outline: 'none'}}>
           <div style={{margin: '16px'}}>
