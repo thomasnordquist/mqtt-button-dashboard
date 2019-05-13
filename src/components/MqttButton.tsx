@@ -23,17 +23,9 @@ function MqttButton(props: Props & DispatchProps) {
   const [editing, setEditing] = React.useState(false)
   let timer: any
 
-  function longPress() {
+  function longPress(event: TouchEvent | MouseEvent | any) {
+    event.preventDefault()
     setEditing(!editing)
-  }
-
-  function touchDown(event: TouchEvent | MouseEvent | any) {
-    // event.preventDefault()
-    timer = setTimeout(longPress, 500)
-  }
-
-  function touchUp() {
-    timer && clearTimeout(timer)
   }
 
   const { button, actions, theme } = props
@@ -50,9 +42,7 @@ function MqttButton(props: Props & DispatchProps) {
         color="primary"
         variant={button.get('state') ? "contained" : "outlined"}
         onClick={() => { actions.toggleButton(button) }}
-        onTouchStart={touchDown}
-        onTouchEnd={touchUp}
-        onContextMenu={touchDown}
+        onContextMenu={longPress}
       >
         <Icon id={button.get('iconId')} color={button.get('state') ? theme.palette.primary.contrastText : theme.palette.primary.main} />
         <span style={{marginLeft: '8px', fontSize: '1.8em', fontWeight: 500, lineHeight: '1.4em'}}>{button.get('name')}</span>

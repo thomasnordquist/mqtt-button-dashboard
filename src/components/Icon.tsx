@@ -6,6 +6,8 @@ export function Icon(props: {id?: string, color: string}) {
     height: '40px',
     width: '40px',
     display: 'inline-block',
+    zIndex: 1,
+    filter: 'opacity(1)', // fix render bug where icon is not renderd
   }
   const iconStyle = {
     height: '40px',

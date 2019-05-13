@@ -7,41 +7,69 @@ import {
   Button,
   Fab,
   IconButton,
+  Modal,
   TextField,
-  Typography
+  Typography,
+  Fade,
+  withStyles
   } from '@material-ui/core'
 import { ButtonRecordFactory } from '../Model'
 import { connect } from 'react-redux'
 import { Icon } from './Icon'
+import { Theme, withTheme } from '@material-ui/core'
 import { ThunkDispatch } from 'redux-thunk'
+
+interface Props {
+  classes: any
+}
 
 interface DispatchProps {
   actions: any
 }
 
-function AddButton(props: DispatchProps) {
+const textFieldStyle = {
+  width: '20em',
+  maxWidth: '90%' 
+}
+
+const styles = (theme: Theme) => ({
+  modal: {
+    width: '100vw', height: '100vh', position: 'fixed', backgroundColor: 'rgba(20, 20, 20, 0.7)',
+    overflow: 'auto'
+  },
+  modalRoot: {
+    outline: 'none',
+  }
+})
+
+function AddButton(props: Props & DispatchProps) {
   const [englishName, setEnglishName] = React.useState('')
   const [iconId, setIconId] = React.useState('')
   const [name, setName] = React.useState('')
   const [visible, setVisible] = React.useState(false)
 
-  let buttonSettings = (
-    <span style={{textAlign: 'center', display: 'block'}}>
-      <div style={{paddingTop: '1em', display: 'inline-block', verticalAlign: 'top', minHeight: '12em', width: '50%', maxWidth: '45em', backgroundColor: 'rgba(70, 70, 70, 0.5)', marginRight: '16px'}}>
-        <Typography>Select Icon</Typography>
-        <IconSelection selected={iconId} term={englishName} didSelect={setIconId} />
-      </div>
-      <div style={{display: 'inline-block', verticalAlign: 'top'}}>
-        <TextField label="Englisch" type="text" onBlur={(event) => {setEnglishName(event.target.value); setIconId('')}} /><br />
-        <TextField label="Deutsch" type="text" onChange={(event) => setName(event.target.value)}/><br /><br />
-        <Button variant="contained" color="primary" onClick={() => props.actions.addButton(englishName, name, iconId)}>Hinzufügen</Button>
-      </div>
-    </span>
-  )
+  function addToButtons() {
+    setVisible(false)
+    props.actions.addButton(englishName, name, iconId)
+  }
+
   return (
     <div>
-      <Fab color="secondary" style={{ backgroundColor: visible ? '#f50057' : 'inherit', transition: 'all 0.75s ease-in', position: 'fixed', right: '16px', bottom: '16px', transform: `rotate(${visible ? 45 : 0}deg)` }} onClick={() => setVisible(!visible)}><AddIcon /></Fab>
-      {visible ? buttonSettings : null}
+      <Fab color="secondary" style={{ zIndex: 1000000000, backgroundColor: visible ? '#f50057' : 'inherit', transition: 'all 0.75s ease-in', position: 'absolute', right: '16px', bottom: '16px', transform: `rotate(${visible ? 45 : 0}deg)` }} onClick={() => setVisible(!visible)}><AddIcon /></Fab>
+      <Modal open={visible} className={props.classes.modal} classes={{ root: props.classes.modalRoot }}>
+        <span style={{textAlign: 'center', display: 'block', outline: 'none'}}>
+          <div style={{margin: '16px'}}>
+            <TextField style={textFieldStyle} label="Englisch" type="text" onBlur={(event) => {setEnglishName(event.target.value); setIconId('')}} /><br />
+            <TextField style={textFieldStyle} label="Deutsch" type="text" onChange={(event) => setName(event.target.value)}/>
+            <div style={{paddingTop: '1em', display: 'block', verticalAlign: 'top', minHeight: '12em', margin: '16px', backgroundColor: 'rgba(70, 70, 70, 0.5)', passing: '8px'}}>
+              <Typography>Select Icon</Typography>
+              <IconSelection selected={iconId} term={englishName} didSelect={setIconId} />
+            </div>
+            <br /><br />
+            <Button style={textFieldStyle} variant="contained" color="primary" onClick={addToButtons}>Hinzufügen</Button>
+          </div>
+        </span>
+      </Modal>
     </div>
   )
 }
@@ -50,7 +78,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>): Dispa
   return {
     actions: {
       addButton: (englishName: string, name: string, iconId: string) => {
-        console.log("hello1")
 
         let button = ButtonRecordFactory({
           name,
@@ -63,7 +90,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>): Dispa
   }
 }
 
-export default connect(undefined, mapDispatchToProps)(AddButton)
+export default connect(undefined, mapDispatchToProps)(withStyles(styles)(AddButton))
 
 interface IconSelectionProps {
   term: string
