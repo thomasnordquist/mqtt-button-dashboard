@@ -2,6 +2,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 require('dotenv').config()
 console.log(process.env)
 
@@ -95,6 +97,10 @@ module.exports = {
       __MQTT_PASS__: JSON.stringify(process.env.MQTT_PASS),
     }),
     new HtmlWebpackPlugin({ template: './index.html', file: './build/index.html', inject: false }),
+    new CopyPlugin([
+      { from: 'manifest.json' },
+      { from: 'icon.png' },
+    ]),
     // new BundleAnalyzerPlugin(),
     //new HardSourceWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
